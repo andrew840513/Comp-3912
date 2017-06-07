@@ -23,7 +23,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     var containerViewController: MapsController?
     let containerSegueName = "mapsSegue"
     @IBAction func startAction(_ sender: Any) {
-       performSegue(withIdentifier: containerSegueName, sender: self)
+        containerViewController?.startMoving = true
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +49,6 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == containerSegueName {
             containerViewController = segue.destination as? MapsController
-            containerViewController?.startMoving = true
         }
     }
 }

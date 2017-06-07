@@ -60,8 +60,9 @@ class MapsController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
                 let longitude = lastLongitude - CLLocationDegrees(currentLongitude!)
                 
                 totalDistent += latitude+longitude
-                drawLine()
-                
+                if totalDistent >= 0.0005{
+                   drawLine()
+                }
             }else{
                 lastLatitude = currentLatitude!
                 lastLongitude = currentLongitude!
