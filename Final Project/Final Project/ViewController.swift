@@ -23,7 +23,15 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     var containerViewController: MapsController?
     let containerSegueName = "mapsSegue"
     @IBAction func startAction(_ sender: Any) {
-        containerViewController?.startMoving = true
+        if !(containerViewController?.startMoving)! {
+            StartBtn.setTitle("STOP WORKOUT", for: .normal)
+            containerViewController?.startMoving = true
+        }else{
+            StartBtn.setTitle("START WORKOUT", for: .normal)
+            containerViewController?.startMoving = false
+            performSegue(withIdentifier: "ShowResult", sender: self)
+        }
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
