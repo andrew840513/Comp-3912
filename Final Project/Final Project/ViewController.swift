@@ -8,13 +8,13 @@
 
 import UIKit
 import CoreLocation
+import GoogleMaps
 
 class ViewController: UIViewController , CLLocationManagerDelegate{
     
     
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var StartBtn: UIButton!
-    @IBOutlet weak var speedLable: UILabel!
     
     var speed = CLLocationSpeed()
     var mapsViewController:MapsController?
@@ -25,10 +25,12 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     @IBAction func startAction(_ sender: Any) {
         if !(containerViewController?.startMoving)! {
             StartBtn.setTitle("STOP WORKOUT", for: .normal)
+            containerViewController?.path = GMSMutablePath()
             containerViewController?.startMoving = true
         }else{
             StartBtn.setTitle("START WORKOUT", for: .normal)
             containerViewController?.startMoving = false
+            containerViewController?.mapView.clear()
             performSegue(withIdentifier: "ShowResult", sender: self)
         }
         
@@ -36,7 +38,6 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        StartBtn.backgroundColor = UIColor.green
         self.locationManager.delegate = self
         self.locationManager.startUpdatingLocation()
     }
@@ -49,7 +50,6 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         //let location = locations.last
         speed = locationManager.location!.speed
-        speedLable.text = String(format: "%.0fkm/h", speed*3.6)
     }
     
     

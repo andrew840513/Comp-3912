@@ -13,12 +13,13 @@ class MapsController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
     
     var mapView:GMSMapView = GMSMapView()
     var locationManager = CLLocationManager()
-    let path = GMSMutablePath()
+    var path:GMSMutablePath?
     var didShowMyLocation:Bool = false
     var lastLatitude:Double = 0
     var lastLongitude:Double = 0
     var totalDistent:Double = 0
     var startMoving:Bool = false
+    var myPath:GMSPolyline?
     
     override func viewDidLoad() {
         let camera = GMSCameraPosition.camera(withLatitude:123 ,
@@ -26,7 +27,6 @@ class MapsController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
                                               zoom: 14)
         self.mapView = GMSMapView.map(withFrame: .zero, camera: camera)
         self.mapView.isMyLocationEnabled = true
-        self.mapView.settings.myLocationButton = true
         self.mapView.delegate = self
         
         self.locationManager.delegate = self
@@ -41,18 +41,19 @@ class MapsController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         let currentLongitude = location?.coordinate.longitude
         
         if(!didShowMyLocation){
-            let camera = GMSCameraPosition.camera(withLatitude: CLLocationDegrees(currentLatitude!), longitude: CLLocationDegrees(currentLongitude!), zoom: 15)
+            let camera = GMSCameraPosition.camera(withLatitude: CLLocationDegrees(currentLatitude!), longitude: CLLocationDegrees(currentLongitude!), zoom: 19)
             self.mapView.animate(to: camera)
             didShowMyLocation = true
         }
+        mapView.animate(toLocation: CLLocationCoordinate2D.init(latitude: currentLatitude!, longitude: currentLongitude!))
         print(startMoving)
         if(startMoving){
             func  drawLine() {
-                path.addLatitude(CLLocationDegrees(currentLatitude!), longitude: CLLocationDegrees(currentLongitude!))
-                let myPath = GMSPolyline(path: path)
-                myPath.strokeColor = UIColor.red
-                myPath.strokeWidth = 5.0
-                myPath.map = mapView
+                path?.addLatitude(CLLocationDegrees(currentLatitude!), longitude: CLLocationDegrees(currentLongitude!))
+                myPath = GMSPolyline(path: path)
+                myPath?.strokeColor = UIColor.red
+                myPath?.strokeWidth = 5.0
+                myPath?.map = mapView
             }
             if(lastLatitude != 0 && lastLongitude != 0)
             {
