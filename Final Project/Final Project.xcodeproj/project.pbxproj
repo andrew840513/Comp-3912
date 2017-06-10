@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		492DDE7A1EE79EF6000C28DF /* ResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492DDE791EE79EF6000C28DF /* ResultController.swift */; };
 		496377111EEA876E009FEAD8 /* StatsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496377101EEA876E009FEAD8 /* StatsController.swift */; };
+		496377131EEBA40A009FEAD8 /* LocationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496377121EEBA40A009FEAD8 /* LocationServices.swift */; };
 		49D39C491EE68F0C005FFA6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D39C481EE68F0C005FFA6B /* AppDelegate.swift */; };
 		49D39C4B1EE68F0C005FFA6B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D39C4A1EE68F0C005FFA6B /* ViewController.swift */; };
 		49D39C4E1EE68F0C005FFA6B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49D39C4C1EE68F0C005FFA6B /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 		0E29F6E3981ABAF0F15B34AE /* Pods-Final Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Final Project.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Final Project/Pods-Final Project.debug.xcconfig"; sourceTree = "<group>"; };
 		492DDE791EE79EF6000C28DF /* ResultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultController.swift; sourceTree = "<group>"; };
 		496377101EEA876E009FEAD8 /* StatsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsController.swift; sourceTree = "<group>"; };
+		496377121EEBA40A009FEAD8 /* LocationServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationServices.swift; sourceTree = "<group>"; };
 		49D39C451EE68F0C005FFA6B /* Final Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Final Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49D39C481EE68F0C005FFA6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49D39C4A1EE68F0C005FFA6B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				49EF2CA31EE6925E00F06911 /* MapsController.swift */,
 				492DDE791EE79EF6000C28DF /* ResultController.swift */,
 				496377101EEA876E009FEAD8 /* StatsController.swift */,
+				496377121EEBA40A009FEAD8 /* LocationServices.swift */,
 			);
 			path = "Final Project";
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 			files = (
 				49EF2CA41EE6925E00F06911 /* MapsController.swift in Sources */,
 				496377111EEA876E009FEAD8 /* StatsController.swift in Sources */,
+				496377131EEBA40A009FEAD8 /* LocationServices.swift in Sources */,
 				49D39C511EE68F0C005FFA6B /* Final_Project.xcdatamodeld in Sources */,
 				492DDE7A1EE79EF6000C28DF /* ResultController.swift in Sources */,
 				49D39C4B1EE68F0C005FFA6B /* ViewController.swift in Sources */,

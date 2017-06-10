@@ -20,18 +20,24 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     var mapsViewController:MapsController?
     var locationManager = CLLocationManager()
     
-    var containerViewController: MapsController?
-    let containerSegueName = "mapsSegue"
+    var mapViewController: MapsController?
+    let mapSegueName = "mapsSegue"
+    var statsViewController: StatsController?
+    let statsSegueName = "statsSegue"
+    
+    
     @IBAction func startAction(_ sender: Any) {
-        if !(containerViewController?.startMoving)! {
+        if !(mapViewController?.startMoving)! {
             StartBtn.setTitle("STOP WORKOUT", for: .normal)
-            containerViewController?.path = GMSMutablePath()
-            containerViewController?.startMoving = true
+            mapViewController?.path = GMSMutablePath()
+            mapViewController?.startMoving = true
+            statsViewController?.runTimer()
         }else{
             StartBtn.setTitle("START WORKOUT", for: .normal)
-            containerViewController?.startMoving = false
-            containerViewController?.mapView.clear()
+            mapViewController?.startMoving = false
+            mapViewController?.mapView.clear()
             performSegue(withIdentifier: "ShowResult", sender: self)
+            statsViewController?.stopTimer()
         }
         
     }
@@ -55,8 +61,11 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == containerSegueName {
-            containerViewController = segue.destination as? MapsController
+        if segue.identifier == mapSegueName {
+            mapViewController = segue.destination as? MapsController
+        }
+        if(segue.identifier == statsSegueName) {
+            statsViewController = segue.destination as? StatsController
         }
     }
 }

@@ -49,7 +49,7 @@
                                     <constraint firstAttribute="height" constant="100" id="5kT-hH-7d5"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="v9R-Uq-5Gc" kind="embed" id="D06-AU-32b"/>
+                                    <segue destination="v9R-Uq-5Gc" kind="embed" identifier="statsSegue" id="D06-AU-32b"/>
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xom-oW-GFf">
@@ -179,6 +179,10 @@
         <scene sceneID="NId-FM-tzq">
             <objects>
                 <viewController id="v9R-Uq-5Gc" customClass="StatsController" customModule="Final_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="m2a-rZ-g7n"/>
+                        <viewControllerLayoutGuide type="bottom" id="zbI-M2-FQZ"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wJ5-GJ-MYT">
                         <rect key="frame" x="0.0" y="0.0" width="374" height="100"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
