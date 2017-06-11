@@ -57,6 +57,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <size key="titleShadowOffset" width="10" height="10"/>
                                 <state key="normal" backgroundImage="navigation"/>
+                                <connections>
+                                    <action selector="backToMyLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7tL-Bv-XlO"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -254,7 +257,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RCF-Tc-ktr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2003" y="996"/>
+            <point key="canvasLocation" x="1184" y="907"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="XIz-E9-Unz">
@@ -271,7 +274,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZQD-Rv-pUA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1057" y="977"/>
+            <point key="canvasLocation" x="330" y="900"/>
         </scene>
     </scenes>
     <resources>

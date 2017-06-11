@@ -5,20 +5,20 @@
 //  Created by Andrew Chen on 2017-06-09.
 //  Copyright © 2017 Andrew Chen. All rights reserved.
 //
-import UIKit
 import CoreLocation
 import GoogleMaps
 
 class LocationServices:NSObject, CLLocationManagerDelegate {
     
-    var locationManager = CLLocationManager()
+    let locationManager = CLLocationManager()
     var speed = CLLocationSpeed()
     var distance :CLLocationDistance = 0.0
-    var location: CLLocation?
+    var startLocation: CLLocation!
+    var isBiking:Bool = false
    override init() {
         super.init()
         self.locationManager.delegate = self
-    
+        startLocation = nil
     }
     
     func start(){
@@ -33,12 +33,23 @@ class LocationServices:NSObject, CLLocationManagerDelegate {
         return speed
     }
     
-    func getDistance() ->CLLocationDistance {
-        return distance
+    func getDistance() ->String {
+        return String(format: "%.2f", distance/1000)
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
-        location = locations.last
-        speed = locationManager.location!.speed
-        distance = CLLocation().distance(from: location!)
+        if(isBiking){
+            let latestLocation: AnyObject = locations[locations.count - 1]
+            speed = locationManager.location!.speed
+            if startLocation == nil {
+                startLocation = latestLocation as! CLLocation
+            }
+            
+            let distanceBetween: CLLocationDistance =
+                latestLocation.distance(from: startLocation)
+            
+            distance += distanceBetween
+            startLocation = latestLocation as! CLLocation
+            NotificationCenter.default.post(name: REFRESH_VALUE, object: nil)
+        }
     }
 }

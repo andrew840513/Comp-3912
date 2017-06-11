@@ -12,8 +12,7 @@ import GoogleMaps
 
 class ViewController: UIViewController , CLLocationManagerDelegate{
     
-    let statsSegueName = "statsSegue"
-    let mapSegueName = "mapsSegue"
+    let locationManager = LocationServices()
     
     var mapViewController: MapsController?
     var statsViewController: StatsController?
@@ -24,19 +23,28 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     
     
     @IBAction func startAction(_ sender: Any) {
+        statsViewController?.locationManager = locationManager
         if !(mapViewController?.startMoving)! {
-            StartBtn.setTitle("STOP WORKOUT", for: .normal)
+            locationManager.start()
+            StartBtn.setTitle(WORKOUT_STOP, for: .normal)
             mapViewController?.path = GMSMutablePath()
             mapViewController?.startMoving = true
             statsViewController?.runTimer()
+            statsViewController?.runDistance()
         }else{
-            StartBtn.setTitle("START WORKOUT", for: .normal)
+            locationManager.stop()
+            StartBtn.setTitle(WORKOUT_START, for: .normal)
+            LocationServices().stop()
             mapViewController?.startMoving = false
             mapViewController?.mapView.clear()
-            performSegue(withIdentifier: "ShowResult", sender: self)
+            performSegue(withIdentifier: RESULT_SEGUE_NAME, sender: self)
             statsViewController?.stopTimer()
+            statsViewController?.stopDistance()
         }
         
+    }
+    @IBAction func backToMyLocation(_ sender: Any) {
+        mapViewController?.moveToCurrentLocation()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
