@@ -46,7 +46,6 @@ class MapsController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
             didShowMyLocation = true
         }
         mapView.animate(toLocation: CLLocationCoordinate2D.init(latitude: currentLatitude!, longitude: currentLongitude!))
-        print(startMoving)
         if(startMoving){
             func  drawLine() {
                 path?.addLatitude(CLLocationDegrees(currentLatitude!), longitude: CLLocationDegrees(currentLongitude!))
@@ -61,10 +60,8 @@ class MapsController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
                 let longitude = abs(lastLongitude) - abs(CLLocationDegrees(currentLongitude!))
                 
                 totalDistent += abs(latitude+longitude)
-                print("total Distent: \(totalDistent)")
                 if totalDistent >= 0.00005{
                    drawLine()
-                    print("draw!")
                 }
             }else{
                 lastLatitude = currentLatitude!

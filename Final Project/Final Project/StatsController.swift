@@ -11,11 +11,15 @@ import UIKit
 class StatsController: UIViewController {
 
     var timer = Timer()
+    var locationManager = LocationServices()
     var seconds = 0
+    
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationManager.start()
+        
         // Do any additional setup after loading the view.
     }
 

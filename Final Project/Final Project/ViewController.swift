@@ -12,18 +12,15 @@ import GoogleMaps
 
 class ViewController: UIViewController , CLLocationManagerDelegate{
     
+    let statsSegueName = "statsSegue"
+    let mapSegueName = "mapsSegue"
+    
+    var mapViewController: MapsController?
+    var statsViewController: StatsController?
+    
     
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var StartBtn: UIButton!
-    
-    var speed = CLLocationSpeed()
-    var mapsViewController:MapsController?
-    var locationManager = CLLocationManager()
-    
-    var mapViewController: MapsController?
-    let mapSegueName = "mapsSegue"
-    var statsViewController: StatsController?
-    let statsSegueName = "statsSegue"
     
     
     @IBAction func startAction(_ sender: Any) {
@@ -44,8 +41,6 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.locationManager.delegate = self
-        self.locationManager.startUpdatingLocation()
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,13 +48,6 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
         // Dispose of any resources that can be recreated.
     }
 
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        //let location = locations.last
-        speed = locationManager.location!.speed
-    }
-    
-    
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == mapSegueName {
             mapViewController = segue.destination as? MapsController
