@@ -17,8 +17,8 @@ class MapsController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
     var didShowMyLocation:Bool = false
     var lastLatitude:Double = 0
     var lastLongitude:Double = 0
-    var currentLatitude:CLLocationDegrees!
-    var currentLongitude:CLLocationDegrees!
+    var currentLatitude:CLLocationDegrees = 0.0
+    var currentLongitude:CLLocationDegrees = 0.0
     var totalDistent:Double = 0
     var startMoving:Bool = false
     var myPath:GMSPolyline?
@@ -36,23 +36,23 @@ class MapsController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         view = mapView
     }
     var camera: GMSCameraPosition?
-    
     func moveToCurrentLocation(){
-        mapView.animate(toLocation: (mapView.myLocation?.coordinate)!)
+        mapView.animate(toLocation: CLLocationCoordinate2D.init(latitude: currentLatitude, longitude: currentLongitude))
     }
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        currentLatitude = mapView.myLocation?.coordinate.latitude
-        currentLongitude = mapView.myLocation?.coordinate.longitude
+        let location = locations.last
+        currentLatitude = (location?.coordinate.latitude)!
+        currentLongitude = (location?.coordinate.longitude)!
+        
         if(!didShowMyLocation){
-            camera = GMSCameraPosition.camera(withLatitude: currentLatitude, longitude: currentLongitude, zoom: 19)
+            camera = GMSCameraPosition.camera(withLatitude: CLLocationDegrees(currentLatitude), longitude: CLLocationDegrees(currentLongitude), zoom: 19)
             self.mapView.animate(to: camera!)
             moveToCurrentLocation()
             didShowMyLocation = true
         }
         if(startMoving){
             func  drawLine() {
-                path?.add((mapView.myLocation?.coordinate)!)
+                path?.addLatitude(CLLocationDegrees(currentLatitude), longitude: CLLocationDegrees(currentLongitude))
                 myPath = GMSPolyline(path: path)
                 myPath?.strokeColor = UIColor.red
                 myPath?.strokeWidth = 5.0
@@ -60,10 +60,10 @@ class MapsController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
             }
             if(lastLatitude != 0 && lastLongitude != 0)
             {
-                let latitude = abs(lastLatitude - currentLatitude)
-                let longitude = abs(lastLongitude - currentLongitude)
+                let latitude = abs(lastLatitude) - abs(CLLocationDegrees(currentLatitude))
+                let longitude = abs(lastLongitude) - abs(CLLocationDegrees(currentLongitude))
                 
-                totalDistent += latitude+longitude
+                totalDistent += abs(latitude+longitude)
                 if totalDistent >= 0.00005{
                    drawLine()
                 }
