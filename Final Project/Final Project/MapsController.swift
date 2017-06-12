@@ -9,10 +9,9 @@
 import UIKit
 import GoogleMaps
 
-class MapsController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
+class MapsController: UIViewController, GMSMapViewDelegate {
     
     var mapView:GMSMapView = GMSMapView()
-    var locationManager = CLLocationManager()
     var path:GMSMutablePath?
     var didShowMyLocation:Bool = false
     var lastLatitude:Double = 0
@@ -22,7 +21,11 @@ class MapsController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
     var totalDistent:Double = 0
     var startMoving:Bool = false
     var myPath:GMSPolyline?
+    var locationManager: LocationServices?
+    let record = LocationRecord(routeName: "Test")
     
+    
+    let locationObserver = NotificationCenter.default
     override func viewDidLoad() {
         let camera = GMSCameraPosition.camera(withLatitude:123 ,
                                               longitude: 151.2086,
@@ -30,8 +33,6 @@ class MapsController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         self.mapView = GMSMapView.map(withFrame: .zero, camera: camera)
         self.mapView.isMyLocationEnabled = true
         self.mapView.delegate = self
-        self.locationManager.delegate = self
-        self.locationManager.startUpdatingLocation()
         
         view = mapView
     }
@@ -41,37 +42,50 @@ class MapsController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         mapView.animate(toLocation: (mapView.myLocation?.coordinate)!)
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        currentLatitude = mapView.myLocation?.coordinate.latitude
-        currentLongitude = mapView.myLocation?.coordinate.longitude
-        if(!didShowMyLocation){
-            camera = GMSCameraPosition.camera(withLatitude: currentLatitude, longitude: currentLongitude, zoom: 19)
-            self.mapView.animate(to: camera!)
-            moveToCurrentLocation()
-            didShowMyLocation = true
-        }
-        if(startMoving){
-            func  drawLine() {
-                path?.add((mapView.myLocation?.coordinate)!)
-                myPath = GMSPolyline(path: path)
-                myPath?.strokeColor = UIColor.red
-                myPath?.strokeWidth = 5.0
-                myPath?.map = mapView
+    func  drawLine() {
+        self.path?.add((self.mapView.myLocation?.coordinate)!)
+        self.myPath = GMSPolyline(path: self.path)
+        self.myPath?.strokeColor = UIColor.red
+        self.myPath?.strokeWidth = 5.0
+        self.myPath?.map = self.mapView
+    }
+    
+    func startDrawing() {
+        locationManager?.start()
+        record.isFileExist()
+        locationObserver.addObserver(forName: REFRESH_VALUE, object: nil, queue: nil){
+            notication in
+            self.currentLatitude = self.mapView.myLocation?.coordinate.latitude
+            self.currentLongitude = self.mapView.myLocation?.coordinate.longitude
+            self.record.addWpt(latitude: self.currentLatitude, longtitude: self.currentLongitude, elevation: 1.0)
+            if(!self.didShowMyLocation){
+                self.camera = GMSCameraPosition.camera(withLatitude: self.currentLatitude, longitude: self.currentLongitude, zoom: 19)
+                self.mapView.animate(to: self.camera!)
+                self.moveToCurrentLocation()
+                self.didShowMyLocation = true
             }
-            if(lastLatitude != 0 && lastLongitude != 0)
+            
+            if(self.lastLatitude != 0 && self.lastLongitude != 0)
             {
-                let latitude = abs(lastLatitude - currentLatitude)
-                let longitude = abs(lastLongitude - currentLongitude)
+                let latitude = abs(self.lastLatitude - self.currentLatitude)
+                let longitude = abs(self.lastLongitude - self.currentLongitude)
                 
-                totalDistent += latitude+longitude
-                if totalDistent >= 0.00005{
-                   drawLine()
+                self.totalDistent += latitude+longitude
+                if self.totalDistent >= 0.00005{
+                    self.drawLine()
                 }
             }else{
-                lastLatitude = currentLatitude
-                lastLongitude = currentLongitude
-                drawLine()
+                self.lastLatitude = self.currentLatitude
+                self.lastLongitude = self.currentLongitude
+                self.drawLine()
             }
         }
+    }
+    
+    func stopDrawing() {
+        locationManager?.stop()
+        locationObserver.removeObserver(self, name: REFRESH_VALUE, object: nil)
+        record.printXML()
+        record.isFileExist()
     }
 }

@@ -14,7 +14,9 @@ class LocationServices:NSObject, CLLocationManagerDelegate {
     var speed = CLLocationSpeed()
     var distance :CLLocationDistance = 0.0
     var startLocation: CLLocation!
-    var isBiking:Bool = false
+    var latitude: CLLocationDegrees!
+    var longtitude: CLLocationDegrees!
+    
    override init() {
         super.init()
         self.locationManager.delegate = self
@@ -26,7 +28,7 @@ class LocationServices:NSObject, CLLocationManagerDelegate {
     }
     
     func stop(){
-        locationManager.stopUpdatingHeading()
+        locationManager.stopUpdatingLocation()
     }
     
     func getSpeed() ->Double {
@@ -36,20 +38,25 @@ class LocationServices:NSObject, CLLocationManagerDelegate {
     func getDistance() ->String {
         return String(format: "%.2f", distance/1000)
     }
+    
+    func getLatitude()->CLLocationDegrees {
+        return latitude
+    }
+    
+    func getLongtitude() ->CLLocationDegrees {
+        return longtitude
+    }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
-        if(isBiking){
             let latestLocation: AnyObject = locations[locations.count - 1]
+            latitude = locations.last?.coordinate.latitude
+            longtitude = locations.last?.coordinate.longitude
             speed = locationManager.location!.speed
             if startLocation == nil {
                 startLocation = latestLocation as! CLLocation
             }
-            
-            let distanceBetween: CLLocationDistance =
-                latestLocation.distance(from: startLocation)
-            
+            let distanceBetween: CLLocationDistance = latestLocation.distance(from: startLocation)
             distance += distanceBetween
             startLocation = latestLocation as! CLLocation
             NotificationCenter.default.post(name: REFRESH_VALUE, object: nil)
-        }
     }
 }

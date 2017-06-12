@@ -60,15 +60,17 @@ class StatsController: UIViewController {
     //DISTANCE
     
     func runDistance() {
-        locationManager?.isBiking = true
+        locationManager?.start()
         locationObserver.addObserver(forName: REFRESH_VALUE, object: nil, queue: nil){
             notication in
             self.distanceLabel.text = self.locationManager?.getDistance()
+            print(#function+" is still running")
         }
     }
     
     func stopDistance() {
-        locationManager?.isBiking = false
+        locationManager?.stop()
+        locationObserver.removeObserver(self, name: REFRESH_VALUE, object: nil)
         self.distanceLabel.text = "0.0"
         self.locationManager?.distance = 0.0
     }

@@ -22,24 +22,24 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     @IBOutlet weak var StartBtn: UIButton!
     
     
-    @IBAction func startAction(_ sender: Any) {
+    @IBAction func startAction(_ sender: Any) {        
         statsViewController?.locationManager = locationManager
         if !(mapViewController?.startMoving)! {
-            locationManager.start()
             StartBtn.setTitle(WORKOUT_STOP, for: .normal)
             mapViewController?.path = GMSMutablePath()
             mapViewController?.startMoving = true
+            mapViewController?.startDrawing()
             statsViewController?.runTimer()
             statsViewController?.runDistance()
         }else{
             locationManager.stop()
             StartBtn.setTitle(WORKOUT_START, for: .normal)
-            LocationServices().stop()
+            mapViewController?.stopDrawing()
             mapViewController?.startMoving = false
             mapViewController?.mapView.clear()
-            performSegue(withIdentifier: RESULT_SEGUE_NAME, sender: self)
             statsViewController?.stopTimer()
             statsViewController?.stopDistance()
+            performSegue(withIdentifier: RESULT_SEGUE_NAME, sender: self)
         }
         
     }
