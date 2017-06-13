@@ -64,7 +64,6 @@ class StatsController: UIViewController {
         locationObserver.addObserver(forName: REFRESH_VALUE, object: nil, queue: nil){
             notication in
             self.distanceLabel.text = self.locationManager?.getDistance()
-            print(#function+" is still running")
         }
     }
     

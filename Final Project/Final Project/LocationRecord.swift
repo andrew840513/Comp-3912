@@ -10,27 +10,13 @@ import Foundation
 import AEXML
 import CoreLocation
 
-extension Formatter {
-    static let iso8601: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar(identifier: .iso8601)
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
-        return formatter
-    }()
-}
-extension Date {
-    var iso8601: String {
-        return Formatter.iso8601.string(from: self)
-    }
-}
-
 class LocationRecord {
     let bikeRoute = AEXMLDocument()
     let attributes = ["xmlns": "http://www.topografix.com/GPX/1/1", "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance","xsi:schemaLocation":"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd"]
+    let StringFromDate = ISO8601DateFormatter()
     var gpx:AEXMLElement?
     var metadata:AEXMLElement?
+    var lastTime:String! = nil
     init(routeName: String) {
         gpx = bikeRoute.addChild(name: "gpx", attributes: attributes)
         metadata = gpx?.addChild(name: "metadata")
@@ -42,13 +28,16 @@ class LocationRecord {
     }
     
     func addWpt(latitude: CLLocationDegrees, longtitude: CLLocationDegrees, elevation:CLLocationDistance) {
-        let wptAttributes = ["lat": "\(latitude)", "lon": "\(longtitude)"]
-        let wpt = gpx?.addChild(name: "wpt", attributes: wptAttributes)
-        let ele = wpt?.addChild(name: "ele")
-        let time = wpt?.addChild(name: "time")
-        ele?.value = "\(elevation)"
-        let StringFromDate = Date().iso8601
-        time?.value = StringFromDate
+        let currentTime =  StringFromDate.string(from: Date())
+        if (lastTime == nil || (lastTime != currentTime)){
+            let wptAttributes = ["lat": "\(latitude)", "lon": "\(longtitude)"]
+            let wpt = gpx?.addChild(name: "wpt", attributes: wptAttributes)
+            let ele = wpt?.addChild(name: "ele")
+            let time = wpt?.addChild(name: "time")
+            ele?.value = "\(elevation)"
+            time?.value = currentTime
+        }
+        lastTime = currentTime
     }
     
     func printXML() {
@@ -76,14 +65,21 @@ class LocationRecord {
     }
     
     func isFileExist() {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-        let url = NSURL(fileURLWithPath: path)
-        let filePath = url.appendingPathComponent("name.gpx")?.path
-        let fileManager = FileManager.default
-        if fileManager.fileExists(atPath: filePath!) {
-            print("FILE AVAILABLE")
-        } else {
-            print("FILE NOT AVAILABLE")
+        let documentsUrl =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        
+        do {
+            // Get the directory contents urls (including subfolders urls)
+            let directoryContents = try FileManager.default.contentsOfDirectory(at: documentsUrl, includingPropertiesForKeys: nil, options: [])
+            print(directoryContents)
+            
+            // if you want to filter the directory contents you can do like this:
+            let mp3Files = directoryContents.filter{ $0.pathExtension == "gpx" }
+            print("mp3 urls:",mp3Files)
+            let mp3FileNames = mp3Files.map{ $0.deletingPathExtension().lastPathComponent }
+            print("mp3 list:", mp3FileNames)
+            
+        } catch let error as NSError {
+            print(error.localizedDescription)
         }
     }
 }

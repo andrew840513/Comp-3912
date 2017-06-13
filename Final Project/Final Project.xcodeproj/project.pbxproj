@@ -19,6 +19,7 @@
 		49D39C511EE68F0C005FFA6B /* Final_Project.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49D39C4F1EE68F0C005FFA6B /* Final_Project.xcdatamodeld */; };
 		49D39C531EE68F0C005FFA6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49D39C521EE68F0C005FFA6B /* Assets.xcassets */; };
 		49D39C561EE68F0C005FFA6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49D39C541EE68F0C005FFA6B /* LaunchScreen.storyboard */; };
+		49E57CFA1EEF61D5004B6D7C /* ResultMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E57CF91EEF61D5004B6D7C /* ResultMapViewController.swift */; };
 		49EF2CA41EE6925E00F06911 /* MapsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EF2CA31EE6925E00F06911 /* MapsController.swift */; };
 		BC98C19D59D24A80F189BF5B /* Pods_Final_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C2E109F08417D268E0978A /* Pods_Final_Project.framework */; };
 /* End PBXBuildFile section */
@@ -38,6 +39,7 @@
 		49D39C521EE68F0C005FFA6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49D39C551EE68F0C005FFA6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49D39C571EE68F0C005FFA6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49E57CF91EEF61D5004B6D7C /* ResultMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultMapViewController.swift; sourceTree = "<group>"; };
 		49EF2CA31EE6925E00F06911 /* MapsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsController.swift; sourceTree = "<group>"; };
 		53C8116C95A35ABE39A797D9 /* Pods-Final Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Final Project.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Final Project/Pods-Final Project.debug.xcconfig"; sourceTree = "<group>"; };
 		A9C364762D6CF0A5F890381A /* Pods-Final Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Final Project.release.xcconfig"; path = "Pods/Target Support Files/Pods-Final Project/Pods-Final Project.release.xcconfig"; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				496377121EEBA40A009FEAD8 /* LocationServices.swift */,
 				498727E91EECFD5700C0B2FC /* Constants.swift */,
 				49A4CED21EEE4CC000953494 /* LocationRecord.swift */,
+				49E57CF91EEF61D5004B6D7C /* ResultMapViewController.swift */,
 			);
 			path = "Final Project";
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 				492DDE7A1EE79EF6000C28DF /* ResultController.swift in Sources */,
 				49D39C4B1EE68F0C005FFA6B /* ViewController.swift in Sources */,
 				49D39C491EE68F0C005FFA6B /* AppDelegate.swift in Sources */,
+				49E57CFA1EEF61D5004B6D7C /* ResultMapViewController.swift in Sources */,
 				498727EA1EECFD5700C0B2FC /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -16,27 +16,37 @@ class MapsController: UIViewController, GMSMapViewDelegate {
     var didShowMyLocation:Bool = false
     var lastLatitude:Double = 0
     var lastLongitude:Double = 0
-    var currentLatitude:CLLocationDegrees!
-    var currentLongitude:CLLocationDegrees!
     var totalDistent:Double = 0
     var startMoving:Bool = false
     var myPath:GMSPolyline?
     var locationManager: LocationServices?
     let record = LocationRecord(routeName: "Test")
-    
-    
+    var dragging:Bool = false
     let locationObserver = NotificationCenter.default
     override func viewDidLoad() {
-        let camera = GMSCameraPosition.camera(withLatitude:123 ,
+        let camera = GMSCameraPosition.camera(withLatitude:49.1232 ,
                                               longitude: 151.2086,
-                                              zoom: 14)
+                                              zoom: 19)
         self.mapView = GMSMapView.map(withFrame: .zero, camera: camera)
         self.mapView.isMyLocationEnabled = true
         self.mapView.delegate = self
-        
         view = mapView
     }
-    var camera: GMSCameraPosition?
+    
+    func mapViewDidStartTileRendering(_ mapView: GMSMapView) {
+        if(!dragging){
+            moveToCurrentLocation()
+            print("I moved")
+            dragging = true
+        }
+    }
+    
+    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
+        if(gesture){
+            print("I moved camara")
+        }
+        
+    }
     
     func moveToCurrentLocation(){
         mapView.animate(toLocation: (mapView.myLocation?.coordinate)!)
@@ -55,28 +65,28 @@ class MapsController: UIViewController, GMSMapViewDelegate {
         record.isFileExist()
         locationObserver.addObserver(forName: REFRESH_VALUE, object: nil, queue: nil){
             notication in
-            self.currentLatitude = self.mapView.myLocation?.coordinate.latitude
-            self.currentLongitude = self.mapView.myLocation?.coordinate.longitude
-            self.record.addWpt(latitude: self.currentLatitude, longtitude: self.currentLongitude, elevation: 1.0)
+            let currentLatitude = self.mapView.myLocation?.coordinate.latitude
+            let currentLongitude = self.mapView.myLocation?.coordinate.longitude
+            self.record.addWpt(latitude: currentLatitude!, longtitude: currentLongitude!, elevation: 1.0)
             if(!self.didShowMyLocation){
-                self.camera = GMSCameraPosition.camera(withLatitude: self.currentLatitude, longitude: self.currentLongitude, zoom: 19)
-                self.mapView.animate(to: self.camera!)
+                let camera = GMSCameraPosition.camera(withLatitude: currentLatitude!, longitude: currentLongitude!, zoom: 19)
+                self.mapView.animate(to: camera)
                 self.moveToCurrentLocation()
                 self.didShowMyLocation = true
             }
             
             if(self.lastLatitude != 0 && self.lastLongitude != 0)
             {
-                let latitude = abs(self.lastLatitude - self.currentLatitude)
-                let longitude = abs(self.lastLongitude - self.currentLongitude)
+                let latitude = abs(self.lastLatitude - currentLatitude!)
+                let longitude = abs(self.lastLongitude - currentLongitude!)
                 
                 self.totalDistent += latitude+longitude
                 if self.totalDistent >= 0.00005{
                     self.drawLine()
                 }
             }else{
-                self.lastLatitude = self.currentLatitude
-                self.lastLongitude = self.currentLongitude
+                self.lastLatitude = currentLatitude!
+                self.lastLongitude = currentLongitude!
                 self.drawLine()
             }
         }
