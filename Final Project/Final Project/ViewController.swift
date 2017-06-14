@@ -16,7 +16,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     
     var mapViewController: MapsController?
     var statsViewController: StatsController?
-    
+    var startMoving:Bool = false
     
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var StartBtn: UIButton!
@@ -24,10 +24,10 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     
     @IBAction func startAction(_ sender: Any) {        
         statsViewController?.locationManager = locationManager
-        if !(mapViewController?.startMoving)! {
+        if (!startMoving) {
             StartBtn.setTitle(WORKOUT_STOP, for: .normal)
             mapViewController?.path = GMSMutablePath()
-            mapViewController?.startMoving = true
+            startMoving = true
             mapViewController?.startDrawing()
             statsViewController?.runTimer()
             statsViewController?.runDistance()
@@ -35,7 +35,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
             locationManager.stop()
             StartBtn.setTitle(WORKOUT_START, for: .normal)
             mapViewController?.stopDrawing()
-            mapViewController?.startMoving = false
+            startMoving = false
             mapViewController?.mapView.clear()
             statsViewController?.stopTimer()
             statsViewController?.stopDistance()

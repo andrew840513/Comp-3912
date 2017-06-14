@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G12b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RiZ-xa-4Zg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RiZ-xa-4Zg">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--Track workout-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="Final_Project" customModuleProvider="target" sceneMemberID="viewController">
@@ -18,11 +18,11 @@
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" userLabel="Main View">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CUg-vo-4VS">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CUg-vo-4VS" userLabel="Google Map">
                                 <rect key="frame" x="0.0" y="-2" width="414" height="689"/>
                                 <color key="backgroundColor" red="0.92539256811141968" green="0.9255480170249939" blue="0.92537081241607666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -43,7 +43,7 @@
                                     <action selector="startAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xlD-RZ-UOd"/>
                                 </connections>
                             </button>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BAF-3G-UCa">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BAF-3G-UCa" userLabel="StatsView">
                                 <rect key="frame" x="20" y="514" width="374" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="5kT-hH-7d5"/>
@@ -52,7 +52,7 @@
                                     <segue destination="v9R-Uq-5Gc" kind="embed" identifier="statsSegue" id="D06-AU-32b"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xom-oW-GFf">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xom-oW-GFf" userLabel="Show My Location">
                                 <rect key="frame" x="359" y="72" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <size key="titleShadowOffset" width="10" height="10"/>
@@ -78,7 +78,7 @@
                             <constraint firstItem="CUg-vo-4VS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="osp-Rq-QsN"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="JMd-dW-df4"/>
+                    <tabBarItem key="tabBarItem" title="Track workout" image="bike_icon" id="JMd-dW-df4"/>
                     <navigationItem key="navigationItem" id="qqq-cZ-2ni"/>
                     <connections>
                         <outlet property="StartBtn" destination="aZt-ju-l2f" id="FTt-ga-l0a"/>
@@ -130,7 +130,6 @@
         <!--Result Controller-->
         <scene sceneID="WfN-kS-S24">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2VI-vb-kdu" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="ResultController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1EA-q0-pjz" customClass="ResultController" customModule="Final_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wbA-9Z-2i5"/>
@@ -188,6 +187,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2VI-vb-kdu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2516" y="162"/>
         </scene>
@@ -247,6 +247,10 @@
         <scene sceneID="XT5-GW-T0V">
             <objects>
                 <viewController id="8yB-bd-vxk" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kos-K6-rOX"/>
+                        <viewControllerLayoutGuide type="bottom" id="z07-ID-jTW"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="E8V-EU-f5J">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="229"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -259,6 +263,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="bike_icon" width="25" height="25"/>
         <image name="navigation" width="35" height="35"/>
     </resources>
 </document>

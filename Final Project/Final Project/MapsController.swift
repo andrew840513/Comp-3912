@@ -17,7 +17,6 @@ class MapsController: UIViewController, GMSMapViewDelegate {
     var lastLatitude:Double = 0
     var lastLongitude:Double = 0
     var totalDistent:Double = 0
-    var startMoving:Bool = false
     var myPath:GMSPolyline?
     var locationManager: LocationServices?
     let record = LocationRecord(routeName: "Test")
