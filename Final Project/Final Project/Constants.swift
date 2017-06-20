@@ -11,6 +11,7 @@ import Foundation
 let RESULT_SEGUE_NAME = "ShowResult"
 let statsSegueName = "statsSegue"
 let mapSegueName = "mapsSegue"
+let resultMapSegueName = "resultMapSegue"
 let WORKOUT_START = "START WORKOUT"
 let WORKOUT_STOP = "STOP WORKOUT"
 let REFRESH_VALUE = NSNotification.Name("status")

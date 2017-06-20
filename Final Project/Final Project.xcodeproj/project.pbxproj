@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		492DDE7A1EE79EF6000C28DF /* ResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492DDE791EE79EF6000C28DF /* ResultController.swift */; };
+		4962E5491EF88B9A009D2AD7 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4962E5481EF88B9A009D2AD7 /* RecordViewController.swift */; };
 		496377111EEA876E009FEAD8 /* StatsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496377101EEA876E009FEAD8 /* StatsController.swift */; };
 		496377131EEBA40A009FEAD8 /* LocationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496377121EEBA40A009FEAD8 /* LocationServices.swift */; };
 		498727EA1EECFD5700C0B2FC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498727E91EECFD5700C0B2FC /* Constants.swift */; };
 		49A4CED31EEE4CC000953494 /* LocationRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A4CED21EEE4CC000953494 /* LocationRecord.swift */; };
-		49AAEDE11EF0D8D900F86B1A /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AAEDE01EF0D8D900F86B1A /* TestViewController.swift */; };
 		49BB41D71EED190900AC7468 /* St_Louis_Zoo_sample.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 49BB41D61EED190900AC7468 /* St_Louis_Zoo_sample.gpx */; };
 		49D39C491EE68F0C005FFA6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D39C481EE68F0C005FFA6B /* AppDelegate.swift */; };
 		49D39C4B1EE68F0C005FFA6B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D39C4A1EE68F0C005FFA6B /* ViewController.swift */; };
@@ -22,16 +22,17 @@
 		49D39C561EE68F0C005FFA6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49D39C541EE68F0C005FFA6B /* LaunchScreen.storyboard */; };
 		49E57CFA1EEF61D5004B6D7C /* ResultMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E57CF91EEF61D5004B6D7C /* ResultMapViewController.swift */; };
 		49EF2CA41EE6925E00F06911 /* MapsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EF2CA31EE6925E00F06911 /* MapsController.swift */; };
+		49FBAA831EF913D200648C9F /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FBAA821EF913D200648C9F /* RecordTableViewCell.swift */; };
 		BC98C19D59D24A80F189BF5B /* Pods_Final_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C2E109F08417D268E0978A /* Pods_Final_Project.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		492DDE791EE79EF6000C28DF /* ResultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultController.swift; sourceTree = "<group>"; };
+		4962E5481EF88B9A009D2AD7 /* RecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		496377101EEA876E009FEAD8 /* StatsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsController.swift; sourceTree = "<group>"; };
 		496377121EEBA40A009FEAD8 /* LocationServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationServices.swift; sourceTree = "<group>"; };
 		498727E91EECFD5700C0B2FC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		49A4CED21EEE4CC000953494 /* LocationRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationRecord.swift; sourceTree = "<group>"; };
-		49AAEDE01EF0D8D900F86B1A /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		49BB41D61EED190900AC7468 /* St_Louis_Zoo_sample.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = St_Louis_Zoo_sample.gpx; sourceTree = "<group>"; };
 		49D39C451EE68F0C005FFA6B /* Final Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Final Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49D39C481EE68F0C005FFA6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +44,7 @@
 		49D39C571EE68F0C005FFA6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49E57CF91EEF61D5004B6D7C /* ResultMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultMapViewController.swift; sourceTree = "<group>"; };
 		49EF2CA31EE6925E00F06911 /* MapsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsController.swift; sourceTree = "<group>"; };
+		49FBAA821EF913D200648C9F /* RecordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
 		53C8116C95A35ABE39A797D9 /* Pods-Final Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Final Project.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Final Project/Pods-Final Project.debug.xcconfig"; sourceTree = "<group>"; };
 		A9C364762D6CF0A5F890381A /* Pods-Final Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Final Project.release.xcconfig"; path = "Pods/Target Support Files/Pods-Final Project/Pods-Final Project.release.xcconfig"; sourceTree = "<group>"; };
 		D5C2E109F08417D268E0978A /* Pods_Final_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Final_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,7 +98,8 @@
 				498727E91EECFD5700C0B2FC /* Constants.swift */,
 				49A4CED21EEE4CC000953494 /* LocationRecord.swift */,
 				49E57CF91EEF61D5004B6D7C /* ResultMapViewController.swift */,
-				49AAEDE01EF0D8D900F86B1A /* TestViewController.swift */,
+				4962E5481EF88B9A009D2AD7 /* RecordViewController.swift */,
+				49FBAA821EF913D200648C9F /* RecordTableViewCell.swift */,
 			);
 			path = "Final Project";
 			sourceTree = "<group>";
@@ -248,12 +251,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49FBAA831EF913D200648C9F /* RecordTableViewCell.swift in Sources */,
 				49EF2CA41EE6925E00F06911 /* MapsController.swift in Sources */,
 				496377111EEA876E009FEAD8 /* StatsController.swift in Sources */,
-				49AAEDE11EF0D8D900F86B1A /* TestViewController.swift in Sources */,
 				496377131EEBA40A009FEAD8 /* LocationServices.swift in Sources */,
 				49A4CED31EEE4CC000953494 /* LocationRecord.swift in Sources */,
 				49D39C511EE68F0C005FFA6B /* Final_Project.xcdatamodeld in Sources */,
+				4962E5491EF88B9A009D2AD7 /* RecordViewController.swift in Sources */,
 				492DDE7A1EE79EF6000C28DF /* ResultController.swift in Sources */,
 				49D39C4B1EE68F0C005FFA6B /* ViewController.swift in Sources */,
 				49D39C491EE68F0C005FFA6B /* AppDelegate.swift in Sources */,

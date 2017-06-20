@@ -10,7 +10,6 @@ import UIKit
 import GoogleMaps
 
 class MapsController: UIViewController, GMSMapViewDelegate {
-    
     var mapView:GMSMapView = GMSMapView()
     var path:GMSMutablePath?
     var didShowMyLocation:Bool = false
@@ -19,10 +18,15 @@ class MapsController: UIViewController, GMSMapViewDelegate {
     var totalDistent:Double = 0
     var myPath:GMSPolyline?
     var locationManager: LocationServices?
-    let record = LocationRecord(routeName: "Test")
+    let record = LocationRecord()
     var dragging:Bool = false
     let locationObserver = NotificationCenter.default
     override func viewDidLoad() {
+    
+    }
+    
+    
+    override func loadView() {
         let camera = GMSCameraPosition.camera(withLatitude:49.1232 ,
                                               longitude: 151.2086,
                                               zoom: 19)
@@ -31,7 +35,6 @@ class MapsController: UIViewController, GMSMapViewDelegate {
         self.mapView.delegate = self
         view = mapView
     }
-    
     func mapViewDidStartTileRendering(_ mapView: GMSMapView) {
         if(!dragging){
             moveToCurrentLocation()
@@ -44,11 +47,12 @@ class MapsController: UIViewController, GMSMapViewDelegate {
         if(gesture){
             print("I moved camara")
         }
-        
     }
     
     func moveToCurrentLocation(){
-        mapView.animate(toLocation: (mapView.myLocation?.coordinate)!)
+        if(mapView.myLocation != nil){
+            mapView.animate(toLocation: (mapView.myLocation?.coordinate)!)
+        }
     }
     
     func  drawLine() {
@@ -61,7 +65,6 @@ class MapsController: UIViewController, GMSMapViewDelegate {
     
     func startDrawing() {
         locationManager?.start()
-        record.isFileExist()
         locationObserver.addObserver(forName: REFRESH_VALUE, object: nil, queue: nil){
             notication in
             let currentLatitude = self.mapView.myLocation?.coordinate.latitude
@@ -94,7 +97,5 @@ class MapsController: UIViewController, GMSMapViewDelegate {
     func stopDrawing() {
         locationManager?.stop()
         locationObserver.removeObserver(self, name: REFRESH_VALUE, object: nil)
-        record.printXML()
-        record.isFileExist()
     }
 }

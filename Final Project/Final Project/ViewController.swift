@@ -11,7 +11,7 @@ import CoreLocation
 import GoogleMaps
 
 class ViewController: UIViewController , CLLocationManagerDelegate{
-    
+    let i: CLLocationManager = CLLocationManager()
     let locationManager = LocationServices()
     
     var mapViewController: MapsController?
@@ -25,6 +25,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     @IBAction func startAction(_ sender: Any) {        
         statsViewController?.locationManager = locationManager
         if (!startMoving) {
+            self.tabBarController?.tabBar.isHidden = true
             StartBtn.setTitle(WORKOUT_STOP, for: .normal)
             mapViewController?.path = GMSMutablePath()
             startMoving = true
@@ -48,9 +49,13 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.tabBarController?.tabBar.isHidden = false
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
