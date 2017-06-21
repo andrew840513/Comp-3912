@@ -39,9 +39,12 @@ class LocationRecord {
         time?.value = currentTime
     }
     
-    func saveFile(name:String) {
+    func saveFile(name:String, duration:String, distance:Double) {
         // get the documents folder url
-        let currentTime =  StringFromDate.string(from: Date())
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMddHHmmss"
+        let currentTime = dateFormatter.string(from: Date())
+        
         let documentDirectory = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
         // create the destination url for the text file to be saved
         let fileName = "\(name)_\(currentTime).gpx"
@@ -51,19 +54,24 @@ class LocationRecord {
         do {
             // writing to disk
             try text.write(to: fileURL, atomically: false, encoding: .utf8)
-            saveToCoreData(fileName: fileName, name: name)
+            saveToCoreData(fileName: fileName, name: name,duration:  duration,distance: distance, date: Date())
             LocationRecord.reset()
         } catch {
             print("error writing to url:", fileURL, error)
         }
     }
-    func saveToCoreData(fileName:String, name:String) {
+    func saveToCoreData(fileName:String, name:String, duration:String, distance:Double, date:Date) {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let route = Route(context: context)
         
         route.fileName = fileName
         route.name = name
-        
+        route.duration = duration
+        route.distance = distance
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
+        let time = dateFormatter.string(from: date)
+        route.date = time
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
@@ -83,6 +91,17 @@ class LocationRecord {
             
         } catch let error as NSError {
             print(error.localizedDescription)
+        }
+    }
+    
+    static func deleteFile(fileName:String) {
+        let fileManager = FileManager()
+        let documentDirectory = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent(fileName)
+        print("\(documentDirectory)")
+        do{
+            try fileManager.removeItem(at: documentDirectory)
+        } catch let error as NSError {
+            print(error.debugDescription)
         }
     }
     

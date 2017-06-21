@@ -11,6 +11,12 @@ import UIKit
 class RecordTableViewCell: UITableViewCell {
 
     @IBOutlet weak var nameLbl: UILabel!
+    @IBOutlet weak var durationLbl: UILabel!
+    @IBOutlet weak var distanceLbl: UILabel!
+    @IBOutlet weak var timeLbl: UILabel!
+    
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }

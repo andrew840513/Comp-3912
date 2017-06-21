@@ -25,10 +25,12 @@ class LocationServices:NSObject, CLLocationManagerDelegate {
     
     func start(){
         locationManager.startUpdatingLocation()
+        locationManager.allowsBackgroundLocationUpdates = true
     }
     
     func stop(){
         locationManager.stopUpdatingLocation()
+        locationManager.allowsBackgroundLocationUpdates = false
     }
     
     func getSpeed() ->Double {

@@ -16,21 +16,27 @@ class ResultController: UIViewController {
     @IBOutlet weak var fileName: UITextField!
     
     var resultMap:ResultMapViewController?
-    
+    static var duration:String?
+    static var distance:Double?
     override func viewDidLoad() {
         super.viewDidLoad()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ResultController.dismissKeyboard))
         view.addGestureRecognizer(tap)
-        let xml = try AEXMLDocument(root: LocationRecord.bikeRoute.root, options: AEXMLOptions())
+        let xml = AEXMLDocument(root: LocationRecord.bikeRoute.root, options: AEXMLOptions())
         for att in xml.root["wpt"].all!{
             let lat:CLLocationDegrees = Double(att.attributes["lat"]!)!
             let lon:CLLocationDegrees = Double(att.attributes["lon"]!)!
             resultMap?.prepareLine(latitude: lat, longitude: lon)
         }
         resultMap?.drawLine()
+        print(ResultController.duration ?? "0.0")
+        print(ResultController.distance ?? "nothing")
         // Do any additional setup after loading the view.
     }
-
+    override func viewWillDisappear(_ animated: Bool) {
+        ResultController.duration = nil
+        ResultController.distance = nil
+    }
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
@@ -44,8 +50,8 @@ class ResultController: UIViewController {
     @IBAction func saveFile(_ sender: Any) {
         let resultData = LocationRecord()
         resultData.createMetadata(routeName: fileName.text!)
-        resultData.saveFile(name: fileName.text!)
-        resultData.isFileExist()
+        resultData.saveFile(name: fileName.text!, duration: ResultController.duration!,distance: ResultController.distance!)
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func discard(_ sender: Any) {

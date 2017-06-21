@@ -40,7 +40,9 @@ class RecordViewController: UIViewController, UITableViewDataSource, UITableView
         if let myName = task.name {
             cell.nameLbl.text = myName
         }
-        
+            cell.distanceLbl.text = "\(task.distance)km"
+            cell.durationLbl.text = task.duration
+            cell.timeLbl.text =  task.date
         return cell
     }
     
@@ -57,6 +59,7 @@ class RecordViewController: UIViewController, UITableViewDataSource, UITableView
         if editingStyle == .delete {
             let task = tasks[indexPath.row]
             context.delete(task)
+            LocationRecord.deleteFile(fileName: task.fileName!)
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
             
             do {

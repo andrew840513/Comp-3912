@@ -393,7 +393,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Base/Frameworks",
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Maps/Frameworks",
-					"$(PROJECT_DIR)/Pods/GooglePlaces/Frameworks",
 				);
 				INFOPLIST_FILE = "Final Project/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -413,7 +412,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Base/Frameworks",
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Maps/Frameworks",
-					"$(PROJECT_DIR)/Pods/GooglePlaces/Frameworks",
 				);
 				INFOPLIST_FILE = "Final Project/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

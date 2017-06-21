@@ -34,12 +34,13 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
             statsViewController?.runDistance()
         }else{
             locationManager.stop()
-            StartBtn.setTitle(WORKOUT_START, for: .normal)
+            ResultController.duration =  statsViewController?.timeStringForStore()
+            ResultController.distance = Double((statsViewController?.distanceLabel.text)!)
+            statsViewController?.stopTimer()
+            statsViewController?.stopDistance()
             mapViewController?.stopDrawing()
             startMoving = false
             mapViewController?.mapView.clear()
-            statsViewController?.stopTimer()
-            statsViewController?.stopDistance()
             performSegue(withIdentifier: RESULT_SEGUE_NAME, sender: self)
         }
         
@@ -54,6 +55,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        StartBtn.setTitle(WORKOUT_START, for: .normal)
         self.tabBarController?.tabBar.isHidden = false
     }
     override func didReceiveMemoryWarning() {
@@ -63,9 +65,11 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == mapSegueName {
+            print("have data1")
             mapViewController = segue.destination as? MapsController
         }
-        if(segue.identifier == statsSegueName) {
+        if segue.identifier == statsSegueName {
+            print("have data2")
             statsViewController = segue.destination as? StatsController
         }
     }
