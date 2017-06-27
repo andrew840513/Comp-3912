@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		491777FE1F02265800923C59 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491777FD1F02265800923C59 /* Util.swift */; };
+		491778001F0244FA00923C59 /* CheckGPSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491777FF1F0244FA00923C59 /* CheckGPSViewController.swift */; };
 		492DDE7A1EE79EF6000C28DF /* ResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492DDE791EE79EF6000C28DF /* ResultController.swift */; };
 		4962E5491EF88B9A009D2AD7 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4962E5481EF88B9A009D2AD7 /* RecordViewController.swift */; };
 		496377111EEA876E009FEAD8 /* StatsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496377101EEA876E009FEAD8 /* StatsController.swift */; };
@@ -27,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		491777FD1F02265800923C59 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		491777FF1F0244FA00923C59 /* CheckGPSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckGPSViewController.swift; sourceTree = "<group>"; };
 		492DDE791EE79EF6000C28DF /* ResultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultController.swift; sourceTree = "<group>"; };
 		4962E5481EF88B9A009D2AD7 /* RecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		496377101EEA876E009FEAD8 /* StatsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsController.swift; sourceTree = "<group>"; };
@@ -100,6 +104,8 @@
 				49E57CF91EEF61D5004B6D7C /* ResultMapViewController.swift */,
 				4962E5481EF88B9A009D2AD7 /* RecordViewController.swift */,
 				49FBAA821EF913D200648C9F /* RecordTableViewCell.swift */,
+				491777FD1F02265800923C59 /* Util.swift */,
+				491777FF1F0244FA00923C59 /* CheckGPSViewController.swift */,
 			);
 			path = "Final Project";
 			sourceTree = "<group>";
@@ -253,8 +259,10 @@
 			files = (
 				49FBAA831EF913D200648C9F /* RecordTableViewCell.swift in Sources */,
 				49EF2CA41EE6925E00F06911 /* MapsController.swift in Sources */,
+				491778001F0244FA00923C59 /* CheckGPSViewController.swift in Sources */,
 				496377111EEA876E009FEAD8 /* StatsController.swift in Sources */,
 				496377131EEBA40A009FEAD8 /* LocationServices.swift in Sources */,
+				491777FE1F02265800923C59 /* Util.swift in Sources */,
 				49A4CED31EEE4CC000953494 /* LocationRecord.swift in Sources */,
 				49D39C511EE68F0C005FFA6B /* Final_Project.xcdatamodeld in Sources */,
 				4962E5491EF88B9A009D2AD7 /* RecordViewController.swift in Sources */,
@@ -395,10 +403,12 @@
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Maps/Frameworks",
 				);
 				INFOPLIST_FILE = "Final Project/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ionblaster.Final-Project";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -414,10 +424,12 @@
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Maps/Frameworks",
 				);
 				INFOPLIST_FILE = "Final Project/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ionblaster.Final-Project";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -38,30 +38,12 @@ class StatsController: UIViewController {
     func stopTimer() {
         timer.invalidate()
         seconds = 0
-        durationLabel.text = timeString(time: TimeInterval(seconds))
+        durationLabel.text = Util().timeString(time: TimeInterval(seconds))
     }
     
     func updateTimer() {
         seconds += 1
-        durationLabel.text = timeString(time: TimeInterval(seconds))
-    }
-    
-    func timeString(time:TimeInterval) -> String {
-        let hours = Int(time) / 3600
-        let minutes = Int(time) / 60 % 60
-        let seconds = Int(time) % 60
-        if(hours != 0){
-            return String(format:"%02i:%02i", hours, minutes)
-        }else{
-            return String(format:"%02i:%02i", minutes, seconds)
-        }
-    }
-    func timeStringForStore() -> String {
-        let time = self.seconds
-        let hours = Int(time) / 3600
-        let minutes = Int(time) / 60 % 60
-        let seconds = Int(time) % 60
-        return String(format:"%02i:%02i:%02i", hours, minutes, seconds)
+        durationLabel.text = Util().timeString(time: TimeInterval(seconds))
     }
     //DISTANCE
     

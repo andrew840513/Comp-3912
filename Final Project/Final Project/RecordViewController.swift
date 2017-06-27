@@ -41,9 +41,18 @@ class RecordViewController: UIViewController, UITableViewDataSource, UITableView
             cell.nameLbl.text = myName
         }
             cell.distanceLbl.text = "\(task.distance)km"
-            cell.durationLbl.text = task.duration
+            cell.durationLbl.text = Util().timeStringForStore(time: TimeInterval(task.second))
             cell.timeLbl.text =  task.date
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let task = tasks[indexPath.row]
+        ResultController.distance = task.distance
+        ResultController.duration = Util().timeStringForStore(time: TimeInterval(task.second))
+        ResultController.second = Int(task.second)
+        print(task.fileName!)
+        ResultController.xml = LocationRecord.loadFile(fileName: task.fileName!)
     }
     
     func getData() {

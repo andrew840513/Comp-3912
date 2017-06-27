@@ -48,7 +48,6 @@ class LocationServices:NSObject, CLLocationManagerDelegate {
     func getLongtitude() ->CLLocationDegrees {
         return longtitude
     }
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
             let latestLocation: AnyObject = locations[locations.count - 1]
             latitude = locations.last?.coordinate.latitude

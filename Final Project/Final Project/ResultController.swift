@@ -14,28 +14,37 @@ import GoogleMaps
 class ResultController: UIViewController {
 
     @IBOutlet weak var fileName: UITextField!
+    @IBOutlet weak var durationLbl: UILabel!
+    @IBOutlet weak var averageSpeedLbl: UILabel!
+    @IBOutlet weak var distanceLbl: UILabel!
     
     var resultMap:ResultMapViewController?
     static var duration:String?
     static var distance:Double?
+    static var second:Int?
+    static var xml:AEXMLDocument?
     override func viewDidLoad() {
         super.viewDidLoad()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ResultController.dismissKeyboard))
         view.addGestureRecognizer(tap)
-        let xml = AEXMLDocument(root: LocationRecord.bikeRoute.root, options: AEXMLOptions())
-        for att in xml.root["wpt"].all!{
+        for att in (ResultController.xml?.root["wpt"].all!)!{
             let lat:CLLocationDegrees = Double(att.attributes["lat"]!)!
             let lon:CLLocationDegrees = Double(att.attributes["lon"]!)!
             resultMap?.prepareLine(latitude: lat, longitude: lon)
         }
         resultMap?.drawLine()
-        print(ResultController.duration ?? "0.0")
-        print(ResultController.distance ?? "nothing")
+        durationLbl.text = ResultController.duration
+        distanceLbl.text = "\(ResultController.distance ?? 0.00) km"
+        averageSpeedLbl.text = Util().calculateAvegeSpeed(distance: ResultController.distance!, second: Double(ResultController.second!))
+        
         // Do any additional setup after loading the view.
     }
     override func viewWillDisappear(_ animated: Bool) {
         ResultController.duration = nil
         ResultController.distance = nil
+        durationLbl.text = "00:00"
+        averageSpeedLbl.text = "0.00 km/h"
+        distanceLbl.text = "0.00 km"
     }
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
@@ -48,9 +57,7 @@ class ResultController: UIViewController {
     }
     
     @IBAction func saveFile(_ sender: Any) {
-        let resultData = LocationRecord()
-        resultData.createMetadata(routeName: fileName.text!)
-        resultData.saveFile(name: fileName.text!, duration: ResultController.duration!,distance: ResultController.distance!)
+        LocationRecord.saveFile(name: fileName.text!, second: ResultController.second!,distance: ResultController.distance!)
         self.dismiss(animated: true, completion: nil)
     }
     

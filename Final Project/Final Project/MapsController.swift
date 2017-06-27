@@ -20,6 +20,7 @@ class MapsController: UIViewController, GMSMapViewDelegate {
     var locationManager: LocationServices?
     let record = LocationRecord()
     var dragging:Bool = false
+    var moveCamera = false
     let locationObserver = NotificationCenter.default
     override func viewDidLoad() {
     
@@ -35,17 +36,16 @@ class MapsController: UIViewController, GMSMapViewDelegate {
         self.mapView.delegate = self
         view = mapView
     }
-    func mapViewDidStartTileRendering(_ mapView: GMSMapView) {
-        if(!dragging){
+    func mapViewDidFinishTileRendering(_ mapView: GMSMapView) {
+        if(!moveCamera) {
             moveToCurrentLocation()
-            print("I moved")
-            dragging = true
+            moveCamera = true
         }
     }
-    
     func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
         if(gesture){
             print("I moved camara")
+            dragging = true
         }
     }
     
@@ -90,6 +90,9 @@ class MapsController: UIViewController, GMSMapViewDelegate {
                 self.lastLatitude = currentLatitude!
                 self.lastLongitude = currentLongitude!
                 self.drawLine()
+            }
+            if(!self.dragging){
+               self.moveToCurrentLocation()
             }
         }
     }

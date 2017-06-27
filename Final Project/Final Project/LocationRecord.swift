@@ -39,7 +39,7 @@ class LocationRecord {
         time?.value = currentTime
     }
     
-    func saveFile(name:String, duration:String, distance:Double) {
+    static func saveFile(name:String, second:Int, distance:Double) {
         // get the documents folder url
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMddHHmmss"
@@ -54,44 +54,25 @@ class LocationRecord {
         do {
             // writing to disk
             try text.write(to: fileURL, atomically: false, encoding: .utf8)
-            saveToCoreData(fileName: fileName, name: name,duration:  duration,distance: distance, date: Date())
+            LocationRecord.saveToCoreData(fileName: fileName, name: name,second:  second,distance: distance, date: Date())
             LocationRecord.reset()
         } catch {
             print("error writing to url:", fileURL, error)
         }
     }
-    func saveToCoreData(fileName:String, name:String, duration:String, distance:Double, date:Date) {
+    static func saveToCoreData(fileName:String, name:String, second:Int, distance:Double, date:Date) {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let route = Route(context: context)
         
         route.fileName = fileName
         route.name = name
-        route.duration = duration
+        route.second = Int64(second)
         route.distance = distance
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
         let time = dateFormatter.string(from: date)
         route.date = time
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
-    }
-    
-    func isFileExist() {
-        let documentsUrl =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        
-        do {
-            // Get the directory contents urls (including subfolders urls)
-            let directoryContents = try FileManager.default.contentsOfDirectory(at: documentsUrl, includingPropertiesForKeys: nil, options: [])
-            print(directoryContents)
-            
-            // if you want to filter the directory contents you can do like this:
-            let mp3Files = directoryContents.filter{ $0.pathExtension == "gpx" }
-            print("gpx urls:",mp3Files)
-            let mp3FileNames = mp3Files.map{ $0.deletingPathExtension().lastPathComponent }
-            print("gpx list:", mp3FileNames)
-            
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        }
     }
     
     static func deleteFile(fileName:String) {
@@ -105,6 +86,23 @@ class LocationRecord {
         }
     }
     
+    static func loadFile()->AEXMLDocument {
+        do {
+            let xml = AEXMLDocument(root: LocationRecord.bikeRoute.root, options: AEXMLOptions())
+            print(xml.xml)
+            return xml
+        }
+    }
+    
+    static func loadFile(fileName:String)->AEXMLDocument {
+        let documentDirectory = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent(fileName)
+        print(documentDirectory)
+        let data = try? Data(contentsOf: documentDirectory)
+        do {
+            let xml = try? AEXMLDocument(xml: data!, options: AEXMLOptions())
+            return xml!
+        }
+    }
     static func printXML() {
         print(LocationRecord.bikeRoute.xml)
     }

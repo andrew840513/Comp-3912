@@ -11,7 +11,6 @@ import CoreLocation
 import GoogleMaps
 
 class ViewController: UIViewController , CLLocationManagerDelegate{
-    let i: CLLocationManager = CLLocationManager()
     let locationManager = LocationServices()
     
     var mapViewController: MapsController?
@@ -34,8 +33,10 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
             statsViewController?.runDistance()
         }else{
             locationManager.stop()
-            ResultController.duration =  statsViewController?.timeStringForStore()
+            ResultController.duration =  Util().timeStringForStore(time: TimeInterval((statsViewController?.seconds)!))
             ResultController.distance = Double((statsViewController?.distanceLabel.text)!)
+            ResultController.second = statsViewController?.seconds
+            ResultController.xml = LocationRecord.loadFile()
             statsViewController?.stopTimer()
             statsViewController?.stopDistance()
             mapViewController?.stopDrawing()
@@ -47,16 +48,24 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     }
     @IBAction func backToMyLocation(_ sender: Any) {
         mapViewController?.moveToCurrentLocation()
+        mapViewController?.dragging = false
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        locationManager.locationManager.requestWhenInUseAuthorization()
         // Do any additional setup after loading the view, typically from a nib.
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         StartBtn.setTitle(WORKOUT_START, for: .normal)
         self.tabBarController?.tabBar.isHidden = false
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        if(CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse){
+            mapViewController?.moveToCurrentLocation()
+        }else{
+            performSegue(withIdentifier: "checkGPSSegue", sender: self)
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

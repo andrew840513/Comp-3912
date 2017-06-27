@@ -1,6 +1,7 @@
+platform :ios, '10.0'
 source 'https://github.com/CocoaPods/Specs.git'
 target 'Final Project' do
   pod 'GoogleMaps'
   use_frameworks!
-  pod ‘AEXML’
+  pod 'AEXML'
 end
