@@ -588,7 +588,7 @@
             <objects>
                 <navigationController storyboardIdentifier="RecordController" id="CEo-bJ-maa" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Record" image="record" selectedImage="record" id="3xf-tM-kIW"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OYv-T2-GlZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="OYv-T2-GlZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
