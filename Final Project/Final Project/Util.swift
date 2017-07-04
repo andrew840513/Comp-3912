@@ -11,13 +11,9 @@ import Foundation
 class Util{
     
     func calculateAvegeSpeed(distance:Double, second:Double) ->String {
-        let averageSpeed = distance / (second/60)
+        let averageSpeed = distance / (second/3600)
         print(averageSpeed)
-        if(averageSpeed < 0.01) {
-            return String(format: "%.2f m/h", averageSpeed*1000)
-        }else{
-            return String(format: "%.2f km/h", averageSpeed)
-        }
+        return String(format: "%.2f km/h", averageSpeed)
     }
     
     func timeString(time:TimeInterval) -> String {

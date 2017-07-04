@@ -21,6 +21,19 @@ class StatsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let screenWidth = self.view.frame.size.width
+        
+        switch screenWidth {
+        case 320,375: // iPhone 4 and iPhone 5
+            distanceLabel.font = UIFont(name: "Avenir-Book", size: 42)
+            durationLabel.font = UIFont(name: "Avenir-Book", size: 42)
+        case 414, 768: // iPhone 6 Plus
+            distanceLabel.font = UIFont(name: "Avenir-Book", size: 52)
+            durationLabel.font = UIFont(name: "Avenir-Book", size: 52)
+        default: // iPad Pro
+            distanceLabel.font = UIFont(name: "Avenir-Book", size: 42)
+            durationLabel.font = UIFont(name: "Avenir-Book", size: 42)
+        }
         // Do any additional setup after loading the view.
     }
     
